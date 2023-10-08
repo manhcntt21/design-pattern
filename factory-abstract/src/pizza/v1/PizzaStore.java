@@ -11,17 +11,14 @@ import pizza.v1.product.Pizza;
  * created in 10/8/2023 3:59 PM
  */
 public class PizzaStore {
+    private SimplePizzaFactory factory;
+
+    public PizzaStore(SimplePizzaFactory simplePizzaFactory) {
+        this.factory = simplePizzaFactory;
+    }
+
     Pizza orderPizza(String type) {
-        Pizza pizza;
-        if(type.equals("cheese")) {
-            pizza = new CheesePizza();
-        } else if(type.equals("greek")) {
-            pizza = new GreekPizza();
-        } else if(type.equals("pepperoni")){
-            pizza = new PepperoniPizza();
-        } else {
-            throw new IllegalArgumentException();
-        }
+        Pizza pizza = factory.createPizza(type);
 
         pizza.prepare();
         pizza.bake();
@@ -32,7 +29,7 @@ public class PizzaStore {
     }
 
     public static void main(String[] args) {
-        PizzaStore ps = new PizzaStore();
+        PizzaStore ps = new PizzaStore(new SimplePizzaFactory());
         Pizza cheese = ps.orderPizza("cheese");
         System.out.println(cheese.toString());
 
