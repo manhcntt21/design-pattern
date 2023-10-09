@@ -55,3 +55,38 @@ Vì vậy để được copy hoàn toàn, ta phải gán lại position cho nó
         System.out.println(plasticTree.getPosition());
         System.out.println(anotherPlasticTree.getPosition());
 ```
+### implement Cloneable interface
+
+#### shallow copy
+
+Chỉ cần triển khai phương phức clone của interface Cloneable
+```java
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+```
+Khi đó giá trị hashcode của 2 tree là khác nhau, nhưng chúng đều tham chiếu đến cùng một nhớ trong heap memory của position. Thay đổi trên cả 2 đối tượng
+```java
+        System.out.println(t.hashCode() == t2.hashCode()); // false
+        position.setX(10);
+        System.out.println(t.getPosition());
+        System.out.println(t2.getPosition());
+```
+#### deep copy
+Sửa hàm clone như sau
+```java
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Tree clone = (Tree) super.clone();
+        clone.setPosition(new Position(clone.getPosition().getX(), clone.getPosition().getY()));
+        return clone;
+    }
+```
+Khi ta thay đổi giá trị của position, nó không thay đổi ở phía còn lại
+```java
+        System.out.println();
+        position.setX(10);
+        System.out.println(t.getPosition());   // 10, 7
+        System.out.println(t2.getPosition());  // 3,7
+```
