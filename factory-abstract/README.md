@@ -65,7 +65,7 @@ Process finished with exit code 0
 ```
 Một điều quan trọng các bạn nên nhớ là tại abstract class PizzaStore, orderPizza() không hề biết loại Pizza nào thực sự được gọi, hành vị này gọi là **decoupled**, vậy cái gì quyết định, đó chính là subclass quyết định trong runtime dựa theo người dùng chọn khu vực nào
 
-##3 V3
+### v3
 Là việc triển khai về nguyên liệu của Pizza, cùng một loại pizza có thể làm từ những nguyên liệu khác nhau, nhưng để tránh cho quá phức tạp mình chỉ đưa demo đơn giản
 
 Các bạn có thể xem file [factory-design-pattern.draw.io](factory-design-pattern.drawio) để hiểu hơn về kiến trúc
